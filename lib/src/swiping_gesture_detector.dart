@@ -72,37 +72,10 @@ class _SwipingGestureDetector extends State<SwipingGestureDetector>
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
-    return GestureDetector(
-      onPanUpdate: (DragUpdateDetails details) {
-        setState(() {
-          widget.dragAlignment += Alignment(details.delta.dx, details.delta.dy);
-        });
-      },
-      onPanStart: (DragStartDetails details) async {
-        if (animationActive) {
-          springController.stop();
-        }
-      },
-      onPanEnd: (DragEndDetails details) async {
-        double vx = details.velocity.pixelsPerSecond.dx;
-        if (vx >= widget.minimumVelocity ||
-            widget.dragAlignment.x >= widget.swipeThreshold) {
-          await widget.swipeRight();
-        } else if (vx <= -widget.minimumVelocity ||
-            widget.dragAlignment.x <= -widget.swipeThreshold) {
-          await widget.swipeLeft();
-        } else {
-          animateBackToDeck(details.velocity.pixelsPerSecond, screenSize);
-        }
-        setState(() {
-          widget.dragAlignment = Alignment.center;
-        });
-      },
-      child: Stack(
-        alignment: Alignment.center,
-        children: topTwoCards(),
-      ),
+    // final Size screenSize = MediaQuery.of(context).size;
+    return Stack(
+      alignment: Alignment.center,
+      children: topTwoCards(),
     );
   }
 
