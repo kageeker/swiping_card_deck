@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 
 //ignore: must_be_immutable
-class SwipingGestureDetector extends StatefulWidget {
+class SwipingGestureDetector<T> extends StatefulWidget {
   SwipingGestureDetector({
     Key? key,
     required this.cardDeck,
@@ -12,15 +12,17 @@ class SwipingGestureDetector extends StatefulWidget {
     required this.cardWidth,
     this.minimumVelocity = 1000,
     this.rotationFactor = .8 / 3.14,
+    this.swipeAnimationDuration = const Duration(milliseconds: 500),
     required this.swipeThreshold,
   }) : super(key: key);
 
-  final List<Card> cardDeck;
+  final List<T> cardDeck;
   final Function() swipeLeft, swipeRight;
   final double minimumVelocity;
   final double rotationFactor;
   final double swipeThreshold;
   final double cardWidth;
+  final Duration swipeAnimationDuration;
 
   Alignment dragAlignment = Alignment.center;
 
@@ -48,7 +50,7 @@ class _SwipingGestureDetector extends State<SwipingGestureDetector>
     });
 
     widget.swipeController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 500));
+        vsync: this, duration: widget.swipeAnimationDuration);
     widget.swipeController.addListener(() {
       setState(() {
         widget.dragAlignment = widget.swipe.value;
