@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import './src/swiping_gesture_detector.dart';
 
 /// A [SwipingDeck] of [Card] widgets
-typedef SwipingCardDeck = SwipingDeck<Card>;
+// typedef SwipingCardDeck = SwipingDeck<Widget>;
 
 /// A deck of [Widget] objects that can be swiped to the left or right
 /// using a gesture or a button.
